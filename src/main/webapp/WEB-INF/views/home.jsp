@@ -10,5 +10,7 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
+
+<p> Questa è la stringa di prova dal server: ${testString} </p>
 </body>
 </html>
