@@ -1,6 +1,10 @@
 package it.simonesorrentino.expenseapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Message {
+	
+	@JsonIgnore
 	private String name;
 	private String message;
 	

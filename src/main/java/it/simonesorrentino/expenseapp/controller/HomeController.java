@@ -8,7 +8,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import it.simonesorrentino.expenseapp.model.Message;
 
 /**
  * Handles requests for the application home page.
@@ -37,6 +41,16 @@ public class HomeController {
 		model.addAttribute("testString", pippo);
 		
 		return "home";
+	}
+	
+	
+	/*Inizio parte Rest*/
+	
+	@RequestMapping(value = "rest/{name}")
+	public @ResponseBody Message getMessage(@PathVariable String name){
+		Message msg = new Message(name, "Hello "+name);
+		
+		return msg;
 	}
 	
 }
