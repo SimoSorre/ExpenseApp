@@ -73,7 +73,7 @@ public class HomeController {
 		NumberFormat nf = new DecimalFormat("#0.00");
 		List<Account> conti = new ArrayList<Account>();
 		Account a = new Account("1", Currency.getInstance(locale), "Conto Corrente", nf.format(0), true);
-		Account a2 = new Account("1", Currency.getInstance(locale), "Genius", nf.format(0), true);
+		Account a2 = new Account("2", Currency.getInstance(locale), "Genius", nf.format(0), true);
 		conti.add(a);
 		conti.add(a2);
 		

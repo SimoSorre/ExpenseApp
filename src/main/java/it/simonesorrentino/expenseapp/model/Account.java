@@ -1,6 +1,7 @@
 package it.simonesorrentino.expenseapp.model;
 
 import java.util.Currency;
+import java.util.List;
 
 public class Account {
 	
@@ -8,6 +9,7 @@ public class Account {
 	private Currency currency;
 	private String name;
 	private String balance;
+	List<Transaction> transactions;
 	private boolean includeInTotal;
 	
 	public Account(){
