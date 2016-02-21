@@ -5,31 +5,29 @@ import java.util.List;
 
 public class Account {
 	
-	private String id;
+	private long id;
 	private Currency currency;
 	private String name;
 	private String balance;
-	List<Transaction> transactions;
 	private boolean includeInTotal;
 	
 	public Account(){
 		super();
 	}
 	
-	public Account(String id, Currency currency, String name, String balance, List<Transaction> transactions, boolean includeInTotal) {
+	public Account(long id, Currency currency, String name, String balance, boolean includeInTotal) {
 		super();
 		this.id = id;
 		this.currency = currency;
 		this.name = name;
 		this.balance = balance;
-		this.transactions = transactions;
 		this.includeInTotal = includeInTotal;
 	}
 	
-	public String getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public Currency getCurrency() {
@@ -49,12 +47,6 @@ public class Account {
 	}
 	public void setBalance(String balance) {
 		this.balance = balance;
-	}
-	public List<Transaction> getTransactions() {
-		return transactions;
-	}
-	public void setTransactions(List<Transaction> transactions) {
-		this.transactions = transactions;
 	}
 	public boolean isIncludeInTotal() {
 		return includeInTotal;

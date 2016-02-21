@@ -6,7 +6,7 @@ import it.simonesorrentino.expenseapp.enums.Type;
 
 public class Transaction {
 
-	private String id;
+	private long id;
 	private Account accountFrom;
 	private Account accountTo;
 	private Double amount;
@@ -20,7 +20,7 @@ public class Transaction {
 		super();
 	}
 	
-	public Transaction(String id, Account accountFrom, Account accountTo, Double amount, Date date, String note,
+	public Transaction(long id, Account accountFrom, Account accountTo, Double amount, Date date, String note,
 			Category category, Type tipo, String accountId) {
 		super();
 		this.id = id;
@@ -34,10 +34,10 @@ public class Transaction {
 		this.accountId = accountId;
 	}
 
-	public String getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public Account getAccountFrom() {
