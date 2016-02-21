@@ -12,5 +12,7 @@
 <P>  The time on the server is ${serverTime}. </P>
 
 <p> Questa è la stringa di prova dal server: ${testString} </p>
+<p> Questo è il numero negativo di prova dal server: ${numeroNegativo} </p>
+<p> Questa è la valuta di prova dal server: ${valuta} </p>
 </body>
 </html>
