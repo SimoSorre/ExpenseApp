@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-//import it.simonesorrentino.expenseapp.enums.Currency;
 import it.simonesorrentino.expenseapp.model.Account;
 import it.simonesorrentino.expenseapp.model.Message;
+import it.simonesorrentino.expenseapp.model.Transaction;
 
 /**
  * Handles requests for the application home page.
@@ -72,8 +72,8 @@ public class HomeController {
 	public @ResponseBody List<Account> getAccounts(Locale locale){
 		NumberFormat nf = new DecimalFormat("#0.00");
 		List<Account> conti = new ArrayList<Account>();
-		Account a = new Account("1", Currency.getInstance(locale), "Conto Corrente", nf.format(0), true);
-		Account a2 = new Account("2", Currency.getInstance(locale), "Genius", nf.format(0), true);
+		Account a = new Account("1", Currency.getInstance(locale), "Conto Corrente", nf.format(0), new ArrayList<Transaction>(), true);
+		Account a2 = new Account("2", Currency.getInstance(locale), "Genius", nf.format(0), new ArrayList<Transaction>(), true);
 		conti.add(a);
 		conti.add(a2);
 		

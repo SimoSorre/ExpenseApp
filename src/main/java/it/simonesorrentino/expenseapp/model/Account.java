@@ -16,12 +16,13 @@ public class Account {
 		super();
 	}
 	
-	public Account(String id, Currency currency, String name, String balance, boolean includeInTotal) {
+	public Account(String id, Currency currency, String name, String balance, List<Transaction> transactions, boolean includeInTotal) {
 		super();
 		this.id = id;
 		this.currency = currency;
 		this.name = name;
 		this.balance = balance;
+		this.transactions = transactions;
 		this.includeInTotal = includeInTotal;
 	}
 	
@@ -48,6 +49,12 @@ public class Account {
 	}
 	public void setBalance(String balance) {
 		this.balance = balance;
+	}
+	public List<Transaction> getTransactions() {
+		return transactions;
+	}
+	public void setTransactions(List<Transaction> transactions) {
+		this.transactions = transactions;
 	}
 	public boolean isIncludeInTotal() {
 		return includeInTotal;

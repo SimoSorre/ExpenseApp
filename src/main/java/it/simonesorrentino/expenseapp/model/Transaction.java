@@ -16,6 +16,24 @@ public class Transaction {
 	private Type tipo;
 	private String accountId;
 	
+	public Transaction() {
+		super();
+	}
+	
+	public Transaction(String id, Account accountFrom, Account accountTo, Double amount, Date date, String note,
+			Category category, Type tipo, String accountId) {
+		super();
+		this.id = id;
+		this.accountFrom = accountFrom;
+		this.accountTo = accountTo;
+		this.amount = amount;
+		this.date = date;
+		this.note = note;
+		this.category = category;
+		this.tipo = tipo;
+		this.accountId = accountId;
+	}
+
 	public String getId() {
 		return id;
 	}
