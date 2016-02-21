@@ -1,20 +1,20 @@
 package it.simonesorrentino.expenseapp.model;
 
-import it.simonesorrentino.expenseapp.enums.Currency;
+import java.util.Currency;
 
 public class Account {
 	
 	private String id;
 	private Currency currency;
 	private String name;
-	private int balance;
+	private String balance;
 	private boolean includeInTotal;
 	
 	public Account(){
 		super();
 	}
 	
-	public Account(String id, Currency currency, String name, int balance, boolean includeInTotal) {
+	public Account(String id, Currency currency, String name, String balance, boolean includeInTotal) {
 		super();
 		this.id = id;
 		this.currency = currency;
@@ -41,10 +41,10 @@ public class Account {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getBalance() {
+	public String getBalance() {
 		return balance;
 	}
-	public void setBalance(int balance) {
+	public void setBalance(String balance) {
 		this.balance = balance;
 	}
 	public boolean isIncludeInTotal() {
