@@ -30,4 +30,16 @@ public class AccountServiceImpl implements AccountService {
 		return accountRepository.save(account);
 	}
 
+	@Override
+	public List<Account> deleteAccount(Account account) {
+		accountRepository.delete(account);
+		return accountRepository.findAll();
+	}
+
+	@Override
+	public List<Account> deleteAllAccount() {
+		accountRepository.deleteAll();
+		return accountRepository.findAll();
+	}
+
 }
