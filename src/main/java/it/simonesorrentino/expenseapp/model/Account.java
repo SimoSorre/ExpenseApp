@@ -1,29 +1,47 @@
 package it.simonesorrentino.expenseapp.model;
 
+import java.io.Serializable;
 import java.util.Currency;
-import java.util.List;
 
-public class Account {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity(name="conto")
+public class Account implements Serializable{
 	
+	private static final long serialVersionUID = 5196359337989846771L;
+	
+	@Id
+	@Column(name="id")
 	private long id;
+	@Column
 	private Currency currency;
+	@Column(name="descrizione")
 	private String name;
-	private String balance;
-	private boolean includeInTotal;
+	@Column
+	private Double balance;
+	@Column
+	private Boolean includeInTotal;
+	@Column(name="is_attivo")
+	private Boolean isAttivo;
 	
+
 	public Account(){
 		super();
 	}
 	
-	public Account(long id, Currency currency, String name, String balance, boolean includeInTotal) {
+	public Account(long id, Currency currency, String name, Double balance, boolean includeInTotal, boolean isAttivo,
+			String descrizione) {
 		super();
 		this.id = id;
 		this.currency = currency;
 		this.name = name;
 		this.balance = balance;
 		this.includeInTotal = includeInTotal;
+		this.isAttivo = isAttivo;
 	}
-	
+
 	public long getId() {
 		return id;
 	}
@@ -42,10 +60,10 @@ public class Account {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getBalance() {
+	public Double getBalance() {
 		return balance;
 	}
-	public void setBalance(String balance) {
+	public void setBalance(Double balance) {
 		this.balance = balance;
 	}
 	public boolean isIncludeInTotal() {
@@ -54,6 +72,15 @@ public class Account {
 	public void setIncludeInTotal(boolean includeInTotal) {
 		this.includeInTotal = includeInTotal;
 	}
+	
+	public boolean isAttivo() {
+		return isAttivo;
+	}
+
+	public void setAttivo(boolean isAttivo) {
+		this.isAttivo = isAttivo;
+	}
+
 
 	@Override
 	public String toString() {
@@ -68,6 +95,8 @@ public class Account {
 		builder.append(balance);
 		builder.append(", includeInTotal=");
 		builder.append(includeInTotal);
+		builder.append(", isAttivo=");
+		builder.append(isAttivo);
 		builder.append("]");
 		return builder.toString();
 	}

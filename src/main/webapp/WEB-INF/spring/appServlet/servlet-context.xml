@@ -3,11 +3,20 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc 
+	http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans
+		 http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/jdbc 
+                           http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+                           http://www.springframework.org/schema/data/jpa
+                           http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
@@ -21,8 +30,53 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<context:annotation-config />
+	<annotation-driven />
 	<context:component-scan base-package="it.simonesorrentino.expenseapp" />
 	
-	
-	
+	<beans:bean name="dataSourceMysql"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<beans:property name="url"
+			value="jdbc:mysql://localhost:3307/expense_manager" />
+		<beans:property name="username" value="root" />
+		<beans:property name="password" value="root" />
+	</beans:bean>
+
+	<!-- SPRING - JPA -->
+	<jpa:repositories base-package="it.simonesorrentino.expenseapp.repository" />
+
+	<beans:bean class="org.springframework.orm.jpa.JpaTransactionManager"
+		id="transactionManager">
+		<beans:property name="entityManagerFactory" ref="entityManagerFactory" />
+		<beans:property name="jpaDialect">
+			<beans:bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
+		</beans:property>
+	</beans:bean>
+
+	<beans:bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<beans:property name="dataSource" ref="dataSourceMysql" />
+		<beans:property name="packagesToScan" value="it.simonesorrentino.expenseapp.model" />
+		<beans:property name="jpaVendorAdapter">
+			<beans:bean
+				class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<beans:property name="generateDdl" value="true" />
+				<beans:property name="showSql" value="false" />
+				<beans:property name="databasePlatform"
+					value="org.hibernate.dialect.MySQLDialect" />
+				<beans:property name="database" value="MYSQL" />
+			</beans:bean>
+		</beans:property>
+		<beans:property name="jpaProperties">
+			<beans:value>
+				<!-- hibernate.cache.use_second_level_cache = true -->
+				<!-- hibernate.cache.region.factory_class = -->
+				<!-- org.hibernate.cache.ehcache.EhCacheRegionFactory -->
+				<!-- hibernate.cache.use_query_cache = true -->
+				<!-- hibernate.generate_statistics -->
+				<!-- = true -->
+			</beans:value>
+		</beans:property>
+	</beans:bean>
 </beans:beans>
