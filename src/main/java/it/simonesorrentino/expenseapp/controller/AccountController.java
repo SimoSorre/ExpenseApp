@@ -1,6 +1,5 @@
 package it.simonesorrentino.expenseapp.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +29,7 @@ public class AccountController {
 	@Autowired
 	private AccountService accountService;
 
-	
+	/*GET*/
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<Object> getAllAccounts(){
 		final String methodName = "getAllAccounts";
@@ -54,6 +53,32 @@ public class AccountController {
 		return new ResponseEntity<Object> (accountService.getAccount(id), HttpStatus.OK );
 	}
 	
+	@RequestMapping(value="name/{name}", method = RequestMethod.GET)
+	public ResponseEntity<Object> getByName(@PathVariable("name") String name){
+		final String methodName="getByName";
+		logger.info(methodName);
+		
+		return new ResponseEntity<Object> (accountService.getAccountByName(name), HttpStatus.OK );
+	}
+	
+	@RequestMapping(value="total", method = RequestMethod.GET)
+	public ResponseEntity<Object> getTotalAccount(){
+		final String methodName="getTotalAccount";
+		logger.info(methodName);
+		
+		List<Account> all = accountService.getAll();
+		Double total = 0.0;
+		
+		for(Account a : all){
+			total += a.getBalance();
+		}
+		
+		return new ResponseEntity<Object> (total, HttpStatus.OK);
+	}
+	/*Fine GET*/
+	
+	
+	/*POST*/
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Object> addAccount(HttpServletRequest request){
 		final String methodName = "addAccount";
@@ -67,7 +92,9 @@ public class AccountController {
 		
 		return new ResponseEntity<Object>(account, HttpStatus.OK);
 	}
+	/*Fine POST*/
 	
+	/*PUT*/
 	@RequestMapping(value="{id}", method= RequestMethod.PUT)
 	public ResponseEntity<Object> updateAccount(@PathVariable("id") long id, HttpServletRequest request){
 		final String methodName="updateAccount";
@@ -79,7 +106,9 @@ public class AccountController {
 		
 		return new ResponseEntity<Object>(accountService.addUpdateAccount(account) , HttpStatus.OK);
 	}
+	/*Fine PUT*/
 	
+	/*DELETE*/
 	@RequestMapping(value="{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Object> deleteAccount(@PathVariable("id") long id ){
 		final String methodName="deleteAccount";
@@ -102,5 +131,5 @@ public class AccountController {
 		
 		return new ResponseEntity<Object> (accountList, HttpStatus.OK);
 	}
- 	
+	/*Fine DELETE*/
 }

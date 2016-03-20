@@ -11,5 +11,6 @@ public interface AccountService {
 	Account addUpdateAccount(Account account);
 	List<Account> deleteAccount(Account account);
 	List<Account> deleteAllAccount();
+	Account getAccountByName(String name);
 
 }
