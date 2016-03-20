@@ -9,19 +9,19 @@ import org.slf4j.LoggerFactory;
 
 import it.simonesorrentino.expenseapp.model.Account;
 
-public class AccountUtility {
+public class FillerUtility {
 	
-	private static final Logger logger = LoggerFactory.getLogger(AccountUtility.class);
+	private static final Logger logger = LoggerFactory.getLogger(FillerUtility.class);
 
-	public static Account fillAccountObject(JSONObject jsonAccount){
+	public static Account fillAccount(JSONObject jsonAccount){
 		Account account = new Account();
 		
-		return fillAccountObject(jsonAccount, account);
+		return fillAccount(jsonAccount, account);
 		
 		
 	}
 	
-	public static Account fillAccountObject(JSONObject jsonAccount, Account account){
+	public static Account fillAccount(JSONObject jsonAccount, Account account){
 		
 		@SuppressWarnings("rawtypes")
 		Iterator key = jsonAccount.keys();

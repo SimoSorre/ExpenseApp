@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import it.simonesorrentino.expenseapp.model.Account;
 import it.simonesorrentino.expenseapp.service.AccountService;
-import it.simonesorrentino.expenseapp.utility.AccountUtility;
+import it.simonesorrentino.expenseapp.utility.FillerUtility;
 import it.simonesorrentino.expenseapp.utility.JsonUtility;
 
 @RestController
@@ -61,7 +61,7 @@ public class AccountController {
 		
 		JSONObject jsonAccount = JsonUtility.returnJson(request);
 
-		Account account = AccountUtility.fillAccountObject(jsonAccount);
+		Account account = FillerUtility.fillAccount(jsonAccount);
 		
 		accountService.addUpdateAccount(account);
 		
@@ -75,7 +75,7 @@ public class AccountController {
 		
 		JSONObject jsonAccount = JsonUtility.returnJson(request);
 		
-		Account account = AccountUtility.fillAccountObject(jsonAccount, accountService.getAccount(id));
+		Account account = FillerUtility.fillAccount(jsonAccount, accountService.getAccount(id));
 		
 		return new ResponseEntity<Object>(accountService.addUpdateAccount(account) , HttpStatus.OK);
 	}
