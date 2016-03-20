@@ -61,7 +61,7 @@ public class AccountController {
 		
 		JSONObject jsonAccount = JsonUtility.returnJson(request);
 
-		Account account = AccountUtility.fillObject(jsonAccount);
+		Account account = AccountUtility.fillAccountObject(jsonAccount);
 		
 		accountService.addUpdateAccount(account);
 		
@@ -75,7 +75,7 @@ public class AccountController {
 		
 		JSONObject jsonAccount = JsonUtility.returnJson(request);
 		
-		Account account = AccountUtility.fillObject(jsonAccount, accountService.getAccount(id));
+		Account account = AccountUtility.fillAccountObject(jsonAccount, accountService.getAccount(id));
 		
 		return new ResponseEntity<Object>(accountService.addUpdateAccount(account) , HttpStatus.OK);
 	}

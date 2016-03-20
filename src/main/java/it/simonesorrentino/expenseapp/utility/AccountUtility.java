@@ -1,6 +1,7 @@
 package it.simonesorrentino.expenseapp.utility;
 
 import java.util.Currency;
+import java.util.Iterator;
 
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -12,24 +13,42 @@ public class AccountUtility {
 	
 	private static final Logger logger = LoggerFactory.getLogger(AccountUtility.class);
 
-	public static Account fillObject(JSONObject jsonAccount){
+	public static Account fillAccountObject(JSONObject jsonAccount){
 		Account account = new Account();
 		
-		return fillObject(jsonAccount, account);
+		return fillAccountObject(jsonAccount, account);
 		
 		
 	}
 	
-	public static Account fillObject(JSONObject jsonAccount, Account account){
+	public static Account fillAccountObject(JSONObject jsonAccount, Account account){
 		
-		account.setAttivo(jsonAccount.getBoolean("attivo"));
-		account.setIncludeInTotal(jsonAccount.getBoolean("includeInTotal"));
-		account.setBalance(jsonAccount.getDouble("balance"));
+		@SuppressWarnings("rawtypes")
+		Iterator key = jsonAccount.keys();
 		
-		if(jsonAccount.get("currency")!=null && Currency.getAvailableCurrencies().contains(Currency.getInstance(jsonAccount.getString("currency")))){
-			account.setCurrency(Currency.getInstance((String)jsonAccount.get("currency")));
+		while(key.hasNext()){
+			switch (String.valueOf(key.next())){
+				case "attivo":
+					account.setAttivo(jsonAccount.getBoolean("attivo"));
+					break;
+				case "includeInTotal":
+					account.setIncludeInTotal(jsonAccount.getBoolean("includeInTotal"));
+					break;
+				case "balance":
+					account.setBalance(jsonAccount.getDouble("balance"));
+					break;
+				case "currency":
+					Currency currency = Currency.getInstance(jsonAccount.getString("currency"));
+					if(jsonAccount.get("currency")!=null && Currency.getAvailableCurrencies().contains(currency)){
+						account.setCurrency(Currency.getInstance((String)jsonAccount.get("currency")));
+					}
+					break;
+				case "name":
+					account.setName(jsonAccount.getString("name"));
+					break;
+			}
+			
 		}
-		account.setName(jsonAccount.getString("name"));
 		
 		return account;
 		
