@@ -10,18 +10,13 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
 
 	@Override
 	List<Account> findAll();
-	
 	Account findById(long id);
+	Account findByName(String name);
 	
 	Account save(Account account);
 	
 	@Override
 	void delete(Account account);
-	
 	void deleteAll();
-	
-	Account findByName(String name);
-	
-	
 	
 }

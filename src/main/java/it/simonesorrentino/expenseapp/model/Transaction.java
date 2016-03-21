@@ -2,26 +2,40 @@ package it.simonesorrentino.expenseapp.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 import it.simonesorrentino.expenseapp.enums.Type;
 
+@Entity(name="movimento")
 public class Transaction {
 
+	@Id
+	@Column(name="id")
 	private long id;
-	private Account accountFrom;
-	private Account accountTo;
+	@Column(name="da_conto")
+	private String accountFrom;
+	@Column(name="a_conto")
+	private String accountTo;
+	@Column(name="importo")
 	private Double amount;
+	@Column(name="data")
 	private Date date;
+	@Column(name="descrizione")
 	private String note;
-	private Category category;
+	@Column(name="categoria")
+	private String category;
+	@Column
 	private Type tipo;
-	private String accountId;
+	
 	
 	public Transaction() {
 		super();
 	}
 	
-	public Transaction(long id, Account accountFrom, Account accountTo, Double amount, Date date, String note,
-			Category category, Type tipo, String accountId) {
+	public Transaction(long id, String accountFrom, String accountTo, Double amount, Date date, String note,
+			String category, Type tipo, String accountId) {
 		super();
 		this.id = id;
 		this.accountFrom = accountFrom;
@@ -31,7 +45,6 @@ public class Transaction {
 		this.note = note;
 		this.category = category;
 		this.tipo = tipo;
-		this.accountId = accountId;
 	}
 
 	public long getId() {
@@ -40,16 +53,16 @@ public class Transaction {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public Account getAccountFrom() {
+	public String getAccountFrom() {
 		return accountFrom;
 	}
-	public void setAccountFrom(Account accountFrom) {
+	public void setAccountFrom(String accountFrom) {
 		this.accountFrom = accountFrom;
 	}
-	public Account getAccountTo() {
+	public String getAccountTo() {
 		return accountTo;
 	}
-	public void setAccountTo(Account accountTo) {
+	public void setAccountTo(String accountTo) {
 		this.accountTo = accountTo;
 	}
 	public Double getAmount() {
@@ -70,10 +83,10 @@ public class Transaction {
 	public void setNote(String note) {
 		this.note = note;
 	}
-	public Category getCategory() {
+	public String getCategory() {
 		return category;
 	}
-	public void setCategory(Category category) {
+	public void setCategory(String category) {
 		this.category = category;
 	}
 	public Type getTipo() {
@@ -81,14 +94,6 @@ public class Transaction {
 	}
 	public void setTipo(Type tipo) {
 		this.tipo = tipo;
-	}
-	
-	public String getAccountId() {
-		return accountId;
-	}
-	
-	public void setAccountId(String accountId) {
-		this.accountId = accountId;
 	}
 	
 	@Override
@@ -110,8 +115,6 @@ public class Transaction {
 		builder.append(category);
 		builder.append(", tipo=");
 		builder.append(tipo);
-		builder.append(", accountId=");
-		builder.append(accountId);
 		builder.append("]");
 		return builder.toString();
 	}
