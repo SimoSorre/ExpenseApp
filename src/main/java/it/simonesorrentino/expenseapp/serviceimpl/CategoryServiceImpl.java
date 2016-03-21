@@ -3,11 +3,13 @@ package it.simonesorrentino.expenseapp.serviceimpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import it.simonesorrentino.expenseapp.model.Category;
 import it.simonesorrentino.expenseapp.repository.CategoryRepository;
 import it.simonesorrentino.expenseapp.service.CategoryService;
 
+@Service
 public class CategoryServiceImpl implements CategoryService {
 
 	@Autowired
