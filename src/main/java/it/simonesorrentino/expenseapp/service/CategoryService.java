@@ -7,10 +7,10 @@ import it.simonesorrentino.expenseapp.model.Category;
 public interface CategoryService {
 	
 	List<Category> getAll();
-	Category getAccount(long id);
-	Category addUpdateAccount(Category category);
-	List<Category> deleteAccount(Category category);
-	List<Category> deleteAllAccount();
-	Category getAccountByName(String name);
+	Category getCategory(long id);
+	Category addUpdateCategory(Category category);
+	List<Category> deleteCategory(Category category);
+	Category getCategoryByName(String name);
+	List<Category> deleteAllCategory();
 	
 }

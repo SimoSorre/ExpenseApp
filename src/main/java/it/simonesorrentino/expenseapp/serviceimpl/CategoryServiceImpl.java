@@ -21,29 +21,29 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public Category getAccount(long id) {
+	public Category getCategory(long id) {
 		return categoryRepository.findById(id);
 	}
 
 	@Override
-	public Category addUpdateAccount(Category category) {
+	public Category addUpdateCategory(Category category) {
 		return categoryRepository.save(category);
 	}
 
 	@Override
-	public List<Category> deleteAccount(Category category) {
+	public List<Category> deleteCategory(Category category) {
 		categoryRepository.delete(category);
 		return categoryRepository.findAll();
 	}
 
 	@Override
-	public List<Category> deleteAllAccount() {
+	public List<Category> deleteAllCategory() {
 		categoryRepository.deleteAll();
 		return categoryRepository.findAll();
 	}
 
 	@Override
-	public Category getAccountByName(String name) {
+	public Category getCategoryByName(String name) {
 		return categoryRepository.findByName(name);
 	}
 

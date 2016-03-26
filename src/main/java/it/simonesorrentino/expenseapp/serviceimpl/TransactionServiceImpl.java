@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.simonesorrentino.expenseapp.model.Account;
+import it.simonesorrentino.expenseapp.model.Category;
 import it.simonesorrentino.expenseapp.model.Transaction;
 import it.simonesorrentino.expenseapp.repository.TransactionRepository;
 import it.simonesorrentino.expenseapp.service.TransactionService;
@@ -26,17 +28,17 @@ public class TransactionServiceImpl implements TransactionService{
 	}
 
 	@Override
-	public Transaction getTransactionByAccountTo(String accountTo) {
+	public List<Transaction> getTransactionByAccountTo(Account accountTo) {
 		return tr.findByAccountTo(accountTo);
 	}
 
 	@Override
-	public Transaction getTransactionByAccountFrom(String accountFrom) {
+	public List<Transaction> getTransactionByAccountFrom(Account accountFrom) {
 		return tr.findByAccountFrom(accountFrom);
 	}
 
 	@Override
-	public Transaction getTransactionByCategory(String category) {
+	public List<Transaction> getTransactionByCategory(Category category) {
 		return tr.findByCategory(category);
 	}
 

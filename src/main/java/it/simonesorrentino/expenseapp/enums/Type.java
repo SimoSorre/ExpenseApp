@@ -1,7 +1,13 @@
 package it.simonesorrentino.expenseapp.enums;
 
 public enum Type {
-	INCOME,
-	EXPENSE,
-	TRANSFER
+	INCOME("INCOME"),
+	EXPENSE("EXPENSE"),
+	TRANSFER("TRANSFER");
+	
+	private String type;
+	
+	Type(String t){
+		type = t;
+	}
 }

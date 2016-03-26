@@ -1,5 +1,6 @@
 package it.simonesorrentino.expenseapp.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -86,7 +87,12 @@ public class AccountController {
 		
 		JSONObject jsonAccount = JsonUtility.returnJson(request);
 
-		Account account = FillerUtility.fillAccount(jsonAccount);
+		Account account = null;
+		try {
+			account = FillerUtility.fillAccount(jsonAccount);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		accountService.addUpdateAccount(account);
 		
@@ -102,7 +108,13 @@ public class AccountController {
 		
 		JSONObject jsonAccount = JsonUtility.returnJson(request);
 		
-		Account account = FillerUtility.fillAccount(jsonAccount, accountService.getAccount(id));
+		Account account = null;
+		try {
+			account = FillerUtility.fillAccount(jsonAccount, accountService.getAccount(id));
+			logger.info(account.toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		return new ResponseEntity<Object>(accountService.addUpdateAccount(account) , HttpStatus.OK);
 	}

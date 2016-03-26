@@ -4,7 +4,14 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import it.simonesorrentino.expenseapp.enums.Type;
 
@@ -14,19 +21,31 @@ public class Transaction {
 	@Id
 	@Column(name="id")
 	private long id;
-	@Column(name="da_conto")
-	private String accountFrom;
-	@Column(name="a_conto")
-	private String accountTo;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="da_conto",referencedColumnName="id")
+	private Account accountFrom;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="a_conto", referencedColumnName="id")
+	private Account accountTo;
+	
 	@Column(name="importo")
 	private Double amount;
-	@Column(name="data")
+	
+	@Column(name="data", columnDefinition="DATETIME")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date date;
+	
 	@Column(name="descrizione")
 	private String note;
-	@Column(name="categoria")
-	private String category;
-	@Column
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="categoria", referencedColumnName="id")
+	private Category category;
+	
+	@Column(name="tipo")
+	@Enumerated(EnumType.STRING)
 	private Type tipo;
 	
 	
@@ -34,8 +53,8 @@ public class Transaction {
 		super();
 	}
 	
-	public Transaction(long id, String accountFrom, String accountTo, Double amount, Date date, String note,
-			String category, Type tipo, String accountId) {
+	public Transaction(long id, Account accountFrom, Account accountTo, Double amount, Date date, String note,
+			Category category, Type tipo, String accountId) {
 		super();
 		this.id = id;
 		this.accountFrom = accountFrom;
@@ -53,16 +72,16 @@ public class Transaction {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getAccountFrom() {
+	public Account getAccountFrom() {
 		return accountFrom;
 	}
-	public void setAccountFrom(String accountFrom) {
+	public void setAccountFrom(Account accountFrom) {
 		this.accountFrom = accountFrom;
 	}
-	public String getAccountTo() {
+	public Account getAccountTo() {
 		return accountTo;
 	}
-	public void setAccountTo(String accountTo) {
+	public void setAccountTo(Account accountTo) {
 		this.accountTo = accountTo;
 	}
 	public Double getAmount() {
@@ -83,10 +102,10 @@ public class Transaction {
 	public void setNote(String note) {
 		this.note = note;
 	}
-	public String getCategory() {
+	public Category getCategory() {
 		return category;
 	}
-	public void setCategory(String category) {
+	public void setCategory(Category category) {
 		this.category = category;
 	}
 	public Type getTipo() {

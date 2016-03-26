@@ -2,10 +2,13 @@ package it.simonesorrentino.expenseapp.model;
 
 import java.io.Serializable;
 import java.util.Currency;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity(name="conto")
 public class Account implements Serializable{
@@ -25,6 +28,9 @@ public class Account implements Serializable{
 	private Boolean includeInTotal;
 	@Column(name="is_attivo")
 	private Boolean isAttivo;
+	@Column(name="data_insetimento", columnDefinition="TIMESTAMP")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataInsermento;
 	
 
 	public Account(){
@@ -69,18 +75,21 @@ public class Account implements Serializable{
 	public boolean isIncludeInTotal() {
 		return includeInTotal;
 	}
-	public void setIncludeInTotal(boolean includeInTotal) {
+	public void setIncludeInTotal(Boolean includeInTotal) {
 		this.includeInTotal = includeInTotal;
 	}
-	
-	public boolean isAttivo() {
+	public Boolean isAttivo() {
 		return isAttivo;
 	}
-
-	public void setAttivo(boolean isAttivo) {
+	public void setAttivo(Boolean isAttivo) {
 		this.isAttivo = isAttivo;
 	}
-
+	public Date getDataInsermento() {
+		return dataInsermento;
+	}
+	public void setDataInsermento(Date dataInsermento) {
+		this.dataInsermento = dataInsermento;
+	}
 
 	@Override
 	public String toString() {
@@ -97,6 +106,8 @@ public class Account implements Serializable{
 		builder.append(includeInTotal);
 		builder.append(", isAttivo=");
 		builder.append(isAttivo);
+		builder.append(", dataInsermento=");
+		builder.append(dataInsermento);
 		builder.append("]");
 		return builder.toString();
 	}
