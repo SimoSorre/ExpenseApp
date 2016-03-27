@@ -39,23 +39,39 @@ public class TransactionController {
 
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<Object> getAllTransactions(){
-		
-		return new ResponseEntity<Object>(ts.getAll() ,HttpStatus.OK);
+		final String methodName="getTransaction";
+		logger.info(methodName);
+		List<Transaction> t = ts.getAll();
+		logger.info(t.toString());
+		return new ResponseEntity<Object>(t ,HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="{id}", method=RequestMethod.GET)
-	public ResponseEntity<Object> getAllTransactions(@PathVariable("id") long id){
-		
-		return new ResponseEntity<Object>(ts.getTransaction(id) ,HttpStatus.OK);
+	public ResponseEntity<Object> getTransaction(@PathVariable("id") long id){
+		final String methodName="getTransaction";
+		logger.info(methodName);
+		Transaction t = ts.getTransaction(id);
+		logger.info(t.toString());
+		return new ResponseEntity<Object>(t ,HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="accountFrom/{name}", method = RequestMethod.GET)
-	public ResponseEntity<Object> getByName(@PathVariable("name") String name){
-		final String methodName="getByName";
+	public ResponseEntity<Object> getByAccountFrom(@PathVariable("name") String name){
+		final String methodName="getByAccountFrom";
 		logger.info(methodName);
 		Account a =as.getAccountByName(name);
 		List<Transaction> t = ts.getTransactionByAccountFrom(a);
-		
+		logger.info(t.toString());
+		return new ResponseEntity<Object> (t, HttpStatus.OK );
+	}
+	
+	@RequestMapping(value="accountTo/{name}", method = RequestMethod.GET)
+	public ResponseEntity<Object> getByAccountTo(@PathVariable("name") String name){
+		final String methodName="getByAccountTo";
+		logger.info(methodName);
+		Account a =as.getAccountByName(name);
+		List<Transaction> t = ts.getTransactionByAccountTo(a);
+		logger.info(t.toString());
 		return new ResponseEntity<Object> (t, HttpStatus.OK );
 	}
 	
@@ -63,7 +79,8 @@ public class TransactionController {
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Object> addTransaction(HttpServletRequest request){
-
+		final String methodName="addTransaction";
+		logger.info(methodName);
 		JSONObject jsonTransaction = JsonUtility.returnJson(request);
 		
 		Transaction t = null;

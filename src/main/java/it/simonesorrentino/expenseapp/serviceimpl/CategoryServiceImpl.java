@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.simonesorrentino.expenseapp.enums.Type;
 import it.simonesorrentino.expenseapp.model.Category;
 import it.simonesorrentino.expenseapp.repository.CategoryRepository;
 import it.simonesorrentino.expenseapp.service.CategoryService;
@@ -45,6 +46,11 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public Category getCategoryByName(String name) {
 		return categoryRepository.findByName(name);
+	}
+
+	@Override
+	public List<Category> getCategoryByTipo(Type tipo) {
+		return categoryRepository.findByTipo(tipo);
 	}
 
 }

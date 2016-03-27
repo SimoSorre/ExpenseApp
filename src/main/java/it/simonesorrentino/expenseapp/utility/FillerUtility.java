@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
 
 import it.simonesorrentino.expenseapp.model.Account;
+import it.simonesorrentino.expenseapp.model.Category;
 import it.simonesorrentino.expenseapp.model.Transaction;
 
 public class FillerUtility {
@@ -46,5 +47,18 @@ public class FillerUtility {
 		
 		return transaction;
 	}
+	
+	public static Category fillCategory(JSONObject jsonCategory) throws JsonParseException, JsonMappingException, IOException{
+		Category category = new ObjectMapper().readValue(jsonCategory.toString(), Category.class);
+		
+		return category;
+	}
+	
+	public static Category fillCategory(JSONObject jsonCategory, Category category) throws JsonProcessingException, IOException{
+		category = new ObjectMapper().readerForUpdating(category).readValue(jsonCategory.toString());
+		
+		return category;
+	}
+
 	
 }
