@@ -2,6 +2,7 @@ package it.simonesorrentino.expenseapp.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -37,6 +38,7 @@ public class AccountController {
 		logger.info(methodName);
 		
 		List<Account> accountList = accountService.getAll();
+		logger.info(accountList.toString());
 		
 		if(accountList.isEmpty()){
 			return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
@@ -95,6 +97,7 @@ public class AccountController {
 		}
 		
 		accountService.addUpdateAccount(account);
+		logger.info(account.toString());
 		
 		return new ResponseEntity<Object>(account, HttpStatus.OK);
 	}

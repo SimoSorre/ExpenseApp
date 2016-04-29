@@ -8,7 +8,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,12 +21,10 @@ public class Transaction {
 	@Column(name="id")
 	private long id;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="da_conto",referencedColumnName="id")
+	@Column(name="da_conto")
 	private Account accountFrom;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="a_conto", referencedColumnName="id")
+	@Column(name="a_conto")
 	private Account accountTo;
 	
 	@Column(name="importo")
@@ -40,8 +37,7 @@ public class Transaction {
 	@Column(name="descrizione")
 	private String note;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="categoria", referencedColumnName="id")
+	@Column(name="categoria")
 	private Category category;
 	
 	@Column(name="tipo")
