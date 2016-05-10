@@ -56,7 +56,7 @@ public class TestController {
 	
 	@RequestMapping(value ="rest/accounts")
 	public @ResponseBody List<Account> getAccounts(Locale locale){
-		NumberFormat nf = new DecimalFormat("#0.00");
+//		NumberFormat nf = new DecimalFormat("#0.00");
 		List<Account> conti = new ArrayList<Account>();
 //		Account a = new Account(1, Currency.getInstance(locale), "Conto Corrente", nf.format(0), true);
 //		Account a2 = new Account(2, Currency.getInstance(locale), "Genius", nf.format(0), true);

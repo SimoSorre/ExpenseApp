@@ -2,7 +2,6 @@ package it.simonesorrentino.expenseapp.controller;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 

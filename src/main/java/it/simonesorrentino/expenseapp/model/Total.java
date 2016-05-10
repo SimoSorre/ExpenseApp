@@ -2,22 +2,13 @@ package it.simonesorrentino.expenseapp.model;
 
 import java.util.Currency;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity(name="totale")
 public class Total {
 	
-	@Id
-	@Column(name="account_id")
 	@JsonIgnore
 	private long accountId;
-	@Column
 	private Currency currency;
-	@Column
 	private Double total;
 	
 	public Total() {
