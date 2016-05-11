@@ -7,8 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import it.simonesorrentino.expenseapp.model.Account;
 import it.simonesorrentino.expenseapp.model.Total;
@@ -17,7 +18,7 @@ import it.simonesorrentino.expenseapp.service.AccountService;
 /**
  * Handles requests for the application home page.
  */
-@RestController
+@Controller
 @RequestMapping(value = "/")
 public class HomeController {
 	
@@ -28,7 +29,7 @@ public class HomeController {
 	
 	
 	@RequestMapping
-	public ResponseEntity<Object> getTotal(){
+	public @ResponseBody ResponseEntity<Object> getTotal(){
 		final String methodName = "getTotal";
 		logger.info(methodName);
 		
@@ -44,6 +45,14 @@ public class HomeController {
 			
 		}
 		return new ResponseEntity<Object> (tot, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="home")
+	public String getIndex(){
+		final String methodName = "homePage";
+		logger.info(methodName);
+		
+		return "index";
 	}
 	
 }
