@@ -7,9 +7,9 @@
   	<script src='<c:url value="/resources/js/app.js" />'></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   </head>
-  <body ng-controller="AccountController">
+  <body>
   
-  	<div class="container">
+  	<div class="container" ng-controller="AccountController">
 	  	<table class="table table-hover">
 	  		<thead>
 	  			<tr>
@@ -31,20 +31,21 @@
   	</div>
   	
   	<div>
-  		<h1>GET Singolo Account</h1>
-  		<div class="container">
+  		<div class="container" ng-controller="TotalController">
+  			<h1>GET Totale</h1>
 	  		<table class="table table-hover">
 	  		<thead>
+	  			<tr>
+	  				<th></th>
+	  				<th>Totale</th>
+	  				<th>Valuta</th>
+	  			</tr>
 	  		</thead>
 	  		<tbody>
 	  			<tr>
 		  			<td></td>
-		  			<td>{{singleAccount.id}}</td>
-			  		<td>{{singleAccount.name}}</td>
-			  		<td>{{singleAccount.balance}}</td>
-			  		<td>{{singleAccount.currency}}</td>
-			  		<td>{{singleAccount.includeInTotal}}</td>
-			  		<td>{{singleAccount.dataInsermento | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+			  		<td>{{totale.total}}</td>
+			  		<td>{{totale.currency}}</td>
 			  	</tr>
 		  	</tbody>
 	  		</table>
