@@ -34,10 +34,10 @@ public class AccountController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<Object> getAllAccounts(){
 		final String methodName = "getAllAccounts";
-		logger.info(methodName);
+		logger.debug(methodName);
 		
 		List<Account> accountList = accountService.getAll();
-		logger.info(accountList.toString());
+		logger.debug(methodName + " - Lista: "+accountList.toString());
 		
 		if(accountList.isEmpty()){
 			return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
