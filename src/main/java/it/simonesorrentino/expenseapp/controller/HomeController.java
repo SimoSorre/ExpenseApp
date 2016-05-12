@@ -28,7 +28,7 @@ public class HomeController {
 	private AccountService as;
 	
 	
-	@RequestMapping
+	@RequestMapping(value="total")
 	public @ResponseBody ResponseEntity<Object> getTotal(){
 		final String methodName = "getTotal";
 		logger.info(methodName);
