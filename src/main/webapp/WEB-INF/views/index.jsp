@@ -16,6 +16,7 @@
 	  				<th>ID</th>
 	  				<th>Nome</th>
 	  				<th>Saldo</th>
+	  				<th>Incluso nel totale</th>
 	  				<th></th>
 	  			</tr>
 	  		</thead>
@@ -24,6 +25,7 @@
 	  				<td>{{account.id}}</td>
 	  				<td>{{account.name}}</td>
 	  				<td>{{account.balance}}</td>
+	  				<td><input type="checkbox" ng-checked="{{account.includeInTotal}}" /></td>
 	  				<td></td>
 	  			</tr>
 	  		</tbody>

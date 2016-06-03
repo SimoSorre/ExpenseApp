@@ -5,7 +5,7 @@ angular
 		
 	})
 	.factory('TotalService', function($resource){
-		return $resource('http://localhost:8080/expenseapp/:totale',{totale: "@totale"});
+		return $resource('http://localhost:8080/expenseapp/total/:totale',{totale: "@totale"});
 	})
 	.controller('AccountController', function($scope, AccountService){
 		$scope.accounts = AccountService.query();
