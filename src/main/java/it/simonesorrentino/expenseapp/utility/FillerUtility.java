@@ -1,9 +1,12 @@
 package it.simonesorrentino.expenseapp.utility;
 
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.Currency;
+import java.util.Date;
 import java.util.Iterator;
 
+import org.apache.log4j.lf5.util.DateFormatManager;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +41,9 @@ public class FillerUtility {
 	
 	public static Transaction fillTransaction(JSONObject jsonTransaction) throws JsonParseException, JsonMappingException, IOException{
 		Transaction transaction = new ObjectMapper().readValue(jsonTransaction.toString(), Transaction.class);
-		
+		if(transaction.getDate()==null){
+			transaction.setDate(new Date());
+		}
 		return transaction;
 	}
 	

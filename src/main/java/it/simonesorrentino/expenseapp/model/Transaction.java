@@ -8,9 +8,12 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import it.simonesorrentino.expenseapp.enums.Type;
 
@@ -21,10 +24,12 @@ public class Transaction {
 	@Column(name="id")
 	private long id;
 	
-	@Column(name="da_conto")
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="da_conto",referencedColumnName="id")
 	private Account accountFrom;
 	
-	@Column(name="a_conto")
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="a_conto",referencedColumnName="id")
 	private Account accountTo;
 	
 	@Column(name="importo")
@@ -32,12 +37,14 @@ public class Transaction {
 	
 	@Column(name="data", columnDefinition="DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
 	private Date date;
 	
 	@Column(name="descrizione")
 	private String note;
 	
-	@Column(name="categoria")
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="categoria", referencedColumnName="id")
 	private Category category;
 	
 	@Column(name="tipo")

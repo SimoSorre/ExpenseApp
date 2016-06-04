@@ -10,4 +10,18 @@ public enum Type {
 	Type(String t){
 		type = t;
 	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+	
+	public Type getByString(String t){
+		return Type.valueOf(t);
+	}
+	
+	
 }

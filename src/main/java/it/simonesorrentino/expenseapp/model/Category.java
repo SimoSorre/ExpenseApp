@@ -33,6 +33,18 @@ public class Category implements Serializable{
 	@Enumerated(EnumType.STRING)
 	private Type tipo;
 	
+	public Category(long id, String name, Date dataInsermento, Type tipo) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.dataInsermento = dataInsermento;
+		this.tipo = tipo;
+	}
+	
+	public Category(){
+		super();
+	}
+	
 	public long getId() {
 		return id;
 	}
