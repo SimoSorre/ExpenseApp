@@ -2,8 +2,8 @@
 <!doctype html>
 <html ng-app="expenseApp">
   <head>
-  	<script src='<c:url value="/resources/js/angular.min.js" />'></script>
-  	<script src='<c:url value="/resources/js/angular-resource.min.js" />'></script>
+  	<script src='<c:url value="/resources/js/node_modules/angular/angular.min.js" />'></script>
+  	<script src='<c:url value="/resources/js/node_modules/angular-resource/angular-resource.min.js" />'></script>
   	<script src='<c:url value="/resources/js/app.js" />'></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   </head>
