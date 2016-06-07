@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.simonesorrentino.expenseapp.enums.Type;
 import it.simonesorrentino.expenseapp.model.Account;
 import it.simonesorrentino.expenseapp.model.Transaction;
 import it.simonesorrentino.expenseapp.service.AccountService;
@@ -36,6 +37,9 @@ public class TransactionController {
 	private AccountService as;
 	@Autowired
 	private CategoryService cs;
+	
+	private Account accountTo;
+	private Account accontFrom;
 
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<Object> getAllTransactions(){
@@ -82,17 +86,47 @@ public class TransactionController {
 		final String methodName="addTransaction";
 		logger.info(methodName);
 		JSONObject jsonTransaction = JsonUtility.returnJson(request);
-		
+		recuperaAccount(jsonTransaction);
 		Transaction t = null;
 		try {
 			t = FillerUtility.fillTransaction(jsonTransaction);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
+		updateAccount(t);
 		ts.addUpdateTransaction(t);
 		
 		return new ResponseEntity<Object>(t,HttpStatus.OK);
+	}
+	
+	
+	private void recuperaAccount(JSONObject jsonTransaction) {
+		Type tipo = Type.valueOf(jsonTransaction.get("tipo").toString());
+		JSONObject jsonAccountTo = null;
+		JSONObject jsonAccountFrom = null;
+		
+		switch (tipo) {
+		case INCOME:
+			jsonAccountTo = jsonTransaction.getJSONObject("accountTo");
+			accountTo = as.getAccount(jsonAccountTo.getLong("id"));
+			break;
+		case EXPENSE:
+			jsonAccountFrom = jsonTransaction.getJSONObject("accountFrom");
+			accontFrom = as.getAccount(jsonAccountFrom.getLong("id"));
+			break;
+		case TRANSFER:
+			jsonAccountFrom = jsonTransaction.getJSONObject("accountFrom");
+			accontFrom = as.getAccount(jsonAccountFrom.getLong("id"));
+			
+			jsonAccountTo = jsonTransaction.getJSONObject("accountTo");
+			accountTo = as.getAccount(jsonAccountTo.getLong("id"));
+			break;
+		}
+	}
+
+	private void updateAccount(Transaction t){
+		
 	}
 
 }
