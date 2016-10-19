@@ -39,7 +39,7 @@ public class TransactionController {
 	private CategoryService cs;
 	
 	private Account accountTo;
-	private Account accontFrom;
+	private Account accountFrom;
 
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<Object> getAllTransactions(){
@@ -94,7 +94,7 @@ public class TransactionController {
 			e.printStackTrace();
 		}
 		
-		updateAccount(t);
+		updateAccount(t, Type.valueOf(jsonTransaction.get("tipo").toString()));
 		ts.addUpdateTransaction(t);
 		
 		return new ResponseEntity<Object>(t,HttpStatus.OK);
@@ -113,11 +113,11 @@ public class TransactionController {
 			break;
 		case EXPENSE:
 			jsonAccountFrom = jsonTransaction.getJSONObject("accountFrom");
-			accontFrom = as.getAccount(jsonAccountFrom.getLong("id"));
+			accountFrom = as.getAccount(jsonAccountFrom.getLong("id"));
 			break;
 		case TRANSFER:
 			jsonAccountFrom = jsonTransaction.getJSONObject("accountFrom");
-			accontFrom = as.getAccount(jsonAccountFrom.getLong("id"));
+			accountFrom = as.getAccount(jsonAccountFrom.getLong("id"));
 			
 			jsonAccountTo = jsonTransaction.getJSONObject("accountTo");
 			accountTo = as.getAccount(jsonAccountTo.getLong("id"));
@@ -125,8 +125,22 @@ public class TransactionController {
 		}
 	}
 
-	private void updateAccount(Transaction t){
-		
+	private void updateAccount(Transaction t, Type tipo){
+		if(accountTo != null && accountFrom == null){
+			//INCOME
+			accountTo.setBalance(accountTo.getBalance() + t.getAmount());
+			as.addUpdateAccount(accountTo);
+		}else if(accountTo == null && accountFrom != null){
+			//EXPENSE
+			accountFrom.setBalance(accountFrom.getBalance() - t.getAmount());
+			as.addUpdateAccount(accountFrom);
+		}else{
+			//TRANSFER
+			accountFrom.setBalance(accountFrom.getBalance() - t.getAmount());
+			accountTo.setBalance(accountTo.getBalance() + t.getAmount());
+			as.addUpdateAccount(accountFrom);
+			as.addUpdateAccount(accountTo);
+		}
 	}
 
 }
