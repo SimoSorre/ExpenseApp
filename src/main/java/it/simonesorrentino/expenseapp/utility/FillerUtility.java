@@ -1,12 +1,8 @@
 package it.simonesorrentino.expenseapp.utility;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.util.Currency;
 import java.util.Date;
-import java.util.Iterator;
 
-import org.apache.log4j.lf5.util.DateFormatManager;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +11,6 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectReader;
 
 import it.simonesorrentino.expenseapp.model.Account;
 import it.simonesorrentino.expenseapp.model.Category;
